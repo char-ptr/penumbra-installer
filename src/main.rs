@@ -34,6 +34,8 @@ fn install_exts() -> anyhow::Result<()> {
         .set_value("", &format!("{},0", pather.to_string_lossy()))?;
     let tt2 = cr.create_subkey(".ttmp2")?;
     tt2.0.set_value("", &"penumbra-installer")?;
+    let tt2 = cr.create_subkey(".ttmp")?;
+    tt2.0.set_value("", &"penumbra-installer")?;
     let tt2 = cr.create_subkey(".pmp")?;
     tt2.0.set_value("", &"penumbra-installer")?;
     Ok(())
@@ -55,7 +57,7 @@ fn main() -> anyhow::Result<()> {
         let install_res = install_exts();
         if let Err(res) = install_res {
             println!("failed to install : {:?}", res);
-            return Ok(MessageDialog::new().set_type(MessageType::Info).set_title("https://github.com/pozm/penumbra-installer - Unable to install file ext").set_text("To regiser this program as the default program for .ttmp2 and .pmp files, please rerun this program as an admin.").show_alert()?);
+            return Ok(MessageDialog::new().set_type(MessageType::Info).set_title("https://github.com/pozm/penumbra-installer - Unable to install file ext").set_text("To register this program as the default program for .ttmp2, .ttmp and .pmp files, please rerun this program as an admin.").show_alert()?);
         } else {
             MessageDialog::new()
                 .set_type(MessageType::Info)
